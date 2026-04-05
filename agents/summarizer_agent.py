@@ -22,5 +22,5 @@ class SummarizerAgent(BaseAgent):
             Be precise and analytical.
             """,
             user=f'Topic: "{topic}"\n\nSources to summarize:\n{sources}',
-            max_tokens=1500,
+            max_tokens=5000,
         )

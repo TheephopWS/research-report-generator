@@ -102,11 +102,10 @@ class SynthesizerAgent(BaseAgent):
             Write in clear, academic prose. Do not just repeat the summaries — synthesize them.
             """,
             user=f'Topic: "{topic}"\n\nSource Summaries:\n{summaries}',
-            max_tokens=1500,
+            max_tokens=5000,
         )
 
     async def generate_latex(self, context: Dict[str, Any]) -> str:
-        """Generate a LaTeX report using tool calling to obtain a tailored template."""
         topic = context["topic"]
         report = context.get("formatter", context.get("critic", ""))
 
@@ -121,6 +120,7 @@ class SynthesizerAgent(BaseAgent):
                     "Then, using the returned template, fill in every section with the "
                     "provided research content and output the complete LaTeX document.\n\n"
                     "Rules:\n"
+                    "- Do not put the final report in any ```latex wrapper, just plain LaTex source\n"
                     "- Output ONLY the final LaTeX source, no commentary\n"
                     "- Properly escape special LaTeX characters in content\n"
                     "- Maintain academic tone and structure\n"
@@ -142,7 +142,7 @@ class SynthesizerAgent(BaseAgent):
             messages=messages,
             tools=[LATEX_TEMPLATE_TOOL],
             tool_choice="any",
-            max_tokens=500,
+            max_tokens=1000,
         )
 
         assistant_msg = response.choices[0].message
@@ -181,7 +181,7 @@ class SynthesizerAgent(BaseAgent):
             response = await self.client.chat.complete_async(
                 model=MODEL,
                 messages=messages,
-                max_tokens=3000,
+                max_tokens=5000,
             )
 
         return response.choices[0].message.content or ""

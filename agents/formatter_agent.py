@@ -53,5 +53,5 @@ Rules:
 - Use the revised synthesis content (not the original) wherever possible
 - Make headings specific and descriptive, not generic labels""",
             user=f'Topic: "{topic}"\n\nResearch content:\n{critic_output}\n\nOriginal sources:\n{sources}',
-            max_tokens=2000,
+            max_tokens=5000,
         )

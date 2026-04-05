@@ -27,5 +27,5 @@ class SearchAgent(BaseAgent):
                 Prefer peer-reviewed papers, authoritative institutions, and reputable outlets.
             """,
             user=f'Find {n} high-quality sources about: "{topic}"',
-            max_tokens=1500,
+            max_tokens=5000,
         )

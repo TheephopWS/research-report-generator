@@ -28,5 +28,5 @@ Synthesis Conclusion) but improve the content
 
 Be direct and intellectually honest.""",
             user=f'Topic: "{topic}"\n\nSynthesis to critique:\n{synthesis}',
-            max_tokens=1500,
+            max_tokens=5000,
         )
