@@ -99,9 +99,9 @@ class ResearchPipeline:
         # Generate LaTeX and compile to PDF via synthesizer tool-calling
         synthesizer = next(a for a in self.agents if a.id == "synthesizer")
         try:
+            yield {"type": "pdf_compiling"}
             latex = await synthesizer.generate_latex(context)
             yield {"type": "latex", "content": latex}
-            yield {"type": "pdf_compiling"}
             pdf_bytes = await _compile_pdf(latex)
             if pdf_bytes:
                 yield {
