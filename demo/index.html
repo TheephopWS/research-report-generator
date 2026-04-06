@@ -496,7 +496,8 @@
         <div class="card-label" style="margin-bottom:0;">Final report</div>
         <div style="display:flex;gap:.5rem;">
           <button class="btn-dl" onclick="downloadReport()">Download .md</button>
-          <button class="btn-dl" id="latex-btn" onclick="downloadLatex()" style="display:none;">Download .tex</button>
+          <span id="pdf-status" style="display:none;font-size:.75rem;color:var(--amber);animation:pulse-dot 1.2s ease-in-out infinite;">Compiling PDF…</span>
+          <button class="btn-dl" id="pdf-btn" onclick="downloadPdf()" style="display:none;">Download PDF</button>
         </div>
       </div>
       <div class="report-body markdown-body" id="report-body"></div>
@@ -515,7 +516,7 @@ const AGENTS = [
 ];
 
 let reportText = "";
-let latexContent = "";
+let pdfBlobUrl = "";
 let running = false;
 
 // Build pipeline steps on load
@@ -596,15 +597,13 @@ function downloadReport() {
   URL.revokeObjectURL(url);
 }
 
-function downloadLatex() {
-  const blob = new Blob([latexContent], { type:"application/x-latex" });
-  const url  = URL.createObjectURL(blob);
+function downloadPdf() {
+  if (!pdfBlobUrl) return;
   const a    = document.createElement("a");
   const slug = document.getElementById("topic").value.trim().replace(/\s+/g,"_").slice(0,40) || "report";
-  a.href = url;
-  a.download = `${slug}_report.tex`;
+  a.href = pdfBlobUrl;
+  a.download = `${slug}_report.pdf`;
   a.click();
-  URL.revokeObjectURL(url);
 }
 
 async function runPipeline() {
@@ -613,7 +612,7 @@ async function runPipeline() {
 
   running = true;
   reportText = "";
-  latexContent = "";
+  if (pdfBlobUrl) { URL.revokeObjectURL(pdfBlobUrl); pdfBlobUrl = ""; }
   const runBtn = document.getElementById("run-btn");
   runBtn.disabled = true;
   runBtn.textContent = "Generating";
@@ -622,7 +621,8 @@ async function runPipeline() {
   document.getElementById("n-sources").disabled = true;
   document.getElementById("error-box").style.display = "none";
   document.getElementById("report-card").style.display = "none";
-  document.getElementById("latex-btn").style.display = "none";
+  document.getElementById("pdf-btn").style.display = "none";
+  document.getElementById("pdf-status").style.display = "none";
   document.getElementById("log-panel").innerHTML = '<p class="log-placeholder">Agent outputs will appear here as each step completes...</p>';
 
   // Reset all agent statuses
@@ -680,9 +680,15 @@ async function runPipeline() {
           document.getElementById("report-body").innerHTML = DOMPurify.sanitize(marked.parse(reportText));
           document.getElementById("report-card").style.display = "block";
           document.getElementById("report-card").scrollIntoView({ behavior: "smooth" });
-        } else if (event.type === "latex") {
-          latexContent = event.content;
-          document.getElementById("latex-btn").style.display = "inline-block";
+        } else if (event.type === "pdf_compiling") {
+          document.getElementById("pdf-status").style.display = "inline-block";
+        } else if (event.type === "pdf") {
+          document.getElementById("pdf-status").style.display = "none";
+          if (pdfBlobUrl) URL.revokeObjectURL(pdfBlobUrl);
+          const bytes = Uint8Array.from(atob(event.content), c => c.charCodeAt(0));
+          const blob = new Blob([bytes], { type: "application/pdf" });
+          pdfBlobUrl = URL.createObjectURL(blob);
+          document.getElementById("pdf-btn").style.display = "inline-block";
         }
       }
     }
