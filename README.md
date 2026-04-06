@@ -2,12 +2,6 @@
 
 Deployed on [https://research-report-generator-live.onrender.com](https://research-report-generator-live.onrender.com)
 
-A **5-agent AI pipeline** that synthesises sources into a polished research report, powered entirely by **Mistral's free API**
-
-```
-Search Agent → Summarizer → Synthesizer → Critic → Formatter
-```
-
 ---
 
 ## Quick Start
