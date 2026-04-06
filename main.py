@@ -10,11 +10,11 @@ from pydantic import BaseModel, Field
 
 load_dotenv()
 
-from pipeline import ResearchPipeline  # noqa: E402 — after load_dotenv
+from pipeline import ResearchPipeline
 
 app = FastAPI(
     title="Research Report Generator",
-    description="A 5-agent AI pipeline: Search → Summarise → Synthesise → Critique → Format",
+    description="",
     version="1.0.0",
 )
 
@@ -42,15 +42,6 @@ async def serve_demo():
 
 @app.post("/api/generate")
 async def generate(req: GenerateRequest):
-    """
-    Stream Server-Sent Events as each agent completes.
-
-    Event shapes:
-      {"type": "agent_start", "agent": str, "message": str}
-      {"type": "agent_done",  "agent": str, "output": str}
-      {"type": "agent_error", "agent": str, "message": str}
-      {"type": "report",      "content": str}
-    """
     if not os.environ.get("MISTRAL_API_KEY"):
         raise HTTPException(
             status_code=500,

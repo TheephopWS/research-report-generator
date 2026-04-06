@@ -14,12 +14,11 @@ from agents import (
 )
 
 
-def _compile_pdf_sync(latex: str) -> bytes | None:
+def _run_pdflatex(latex: str) -> bytes | None:
     with tempfile.TemporaryDirectory() as tmpdir:
         tex_path = Path(tmpdir) / "report.tex"
         tex_path.write_text(latex, encoding="utf-8")
         try:
-            # Run twice so TOC and hyperref cross-references resolve correctly
             for _ in range(2):
                 subprocess.run(
                     [
@@ -41,16 +40,10 @@ def _compile_pdf_sync(latex: str) -> bytes | None:
 
 async def _compile_pdf(latex: str) -> bytes | None:
     loop = asyncio.get_event_loop()
-    return await loop.run_in_executor(None, _compile_pdf_sync, latex)
+    return await loop.run_in_executor(None, _run_pdflatex, latex)
 
 
 class ResearchPipeline:
-    """
-    Chains five specialised agents in sequence.
-    Each agent receives the accumulated context and yields
-    SSE-compatible dict events for the API to stream.
-    """
-
     def __init__(self, topic: str, num_sources: int):
         self.topic = topic
         self.num_sources = max(2, min(num_sources, 6))
@@ -90,13 +83,12 @@ class ResearchPipeline:
                 }
                 return
 
-        # Emit the final formatted report
         yield {
             "type": "report",
             "content": context.get("formatter", ""),
         }
 
-        # Generate LaTeX and compile to PDF via synthesizer tool-calling
+        # Latex and pdf
         synthesizer = next(a for a in self.agents if a.id == "synthesizer")
         try:
             yield {"type": "pdf_compiling"}
@@ -109,4 +101,4 @@ class ResearchPipeline:
                     "content": base64.b64encode(pdf_bytes).decode(),
                 }
         except Exception:
-            pass  # LaTeX/PDF generation is non-critical
+            pass

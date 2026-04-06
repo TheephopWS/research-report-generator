@@ -5,7 +5,6 @@ from agents.base import BaseAgent, MODEL
 
 
 def get_report_template(title: str, sections: list) -> str:
-    """Return a tailored LaTeX report template for the given structure."""
     sec = "\n\n".join("\\section{" + s + "}" for s in sections)
     return "\n".join([
         "\\documentclass[12pt,a4paper]{article}",
@@ -109,7 +108,7 @@ class SynthesizerAgent(BaseAgent):
         topic = context["topic"]
         report = context.get("formatter", context.get("critic", ""))
 
-        messages = [
+        messages: list[Dict[str, Any]] = [
             {
                 "role": "system",
                 "content": (
@@ -124,7 +123,7 @@ class SynthesizerAgent(BaseAgent):
                     "- Output ONLY the final LaTeX source, no commentary\n"
                     "- Properly escape special LaTeX characters in content\n"
                     "- Maintain academic tone and structure\n"
-                    "- Include all references in the bibliography section"
+                    "- Remove the references section and include all references in the bibliography section\n"
                 ),
             },
             {
@@ -136,7 +135,7 @@ class SynthesizerAgent(BaseAgent):
             },
         ]
 
-        # Step 1 - LLM calls the tool to get a tailored template
+        # Get template
         response = await self.client.chat.complete_async(
             model=MODEL,
             messages=messages,
@@ -154,11 +153,9 @@ class SynthesizerAgent(BaseAgent):
             fn_args = json.loads(raw_args) if isinstance(raw_args, str) else raw_args
             args_str = raw_args if isinstance(raw_args, str) else json.dumps(raw_args)
 
-            # Execute the tool locally
             tool_fn = _TOOL_FUNCTIONS.get(fn_name)
             tool_result = tool_fn(**fn_args) if tool_fn else ""
 
-            # Feed the template back so the model can fill it in
             messages.append({
                 "role": "assistant",
                 "content": assistant_msg.content or "",
@@ -177,7 +174,6 @@ class SynthesizerAgent(BaseAgent):
                 "name": fn_name,
             })
 
-            # Step 2 - LLM fills in the template with research content
             response = await self.client.chat.complete_async(
                 model=MODEL,
                 messages=messages,

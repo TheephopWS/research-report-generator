@@ -590,8 +590,11 @@ function showError(msg) {
 function downloadReport() {
   const blob = new Blob([reportText], { type:"text/markdown" });
   const url  = URL.createObjectURL(blob);
-  const a    = document.createElement("a");
-  const slug = document.getElementById("topic").value.trim().replace(/\s+/g,"_").slice(0,40) || "report";
+  const a = document.createElement("a");
+  const titleMatch = reportText.match(/^#\s+(.+)$/m);
+  const slug = titleMatch
+    ? titleMatch[1].trim().replace(/\s+/g, "_").replace(/[^\w_-]/g, "").slice(0, 60)
+    : document.getElementById("topic").value.trim().replace(/\s+/g, "_").slice(0, 40) || "report";
   a.href = url;
   a.download = `${slug}_report.md`;
   a.click();
@@ -600,8 +603,11 @@ function downloadReport() {
 
 function downloadPdf() {
   if (!pdfBlobUrl) return;
-  const a    = document.createElement("a");
-  const slug = document.getElementById("topic").value.trim().replace(/\s+/g,"_").slice(0,40) || "report";
+  const a = document.createElement("a");
+  const titleMatch = reportText.match(/^#\s+(.+)$/m);
+  const slug = titleMatch
+    ? titleMatch[1].trim().replace(/\s+/g, "_").replace(/[^\w_-]/g, "").slice(0, 60)
+    : document.getElementById("topic").value.trim().replace(/\s+/g, "_").slice(0, 40) || "report";
   a.href = pdfBlobUrl;
   a.download = `${slug}_report.pdf`;
   a.click();
