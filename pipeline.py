@@ -13,7 +13,6 @@ from agents import (
     FormatterAgent,
 )
 
-
 def _run_pdflatex(latex: str) -> bytes | None:
     with tempfile.TemporaryDirectory() as tmpdir:
         tex_path = Path(tmpdir) / "report.tex"
@@ -56,6 +55,9 @@ class ResearchPipeline:
         ]
 
     async def run(self) -> AsyncGenerator[Dict[str, Any], None]:
+        if len(self.topic) < 3:
+            raise ValueError("Topic is too short. Please provide topic of at least 3 characters.")
+            
         context: Dict[str, Any] = {
             "topic": self.topic,
             "num_sources": self.num_sources,
