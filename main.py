@@ -27,13 +27,12 @@ app.add_middleware(
 
 
 class GenerateRequest(BaseModel):
-    topic: str = Field(..., min_length=3, max_length=500)
+    topic: str = Field(..., max_length=500)
     num_sources: int = Field(default=3, ge=2, le=6)
 
 
 @app.get("/", response_class=HTMLResponse)
 async def serve_demo():
-    """Serve the demo front-end."""
     demo_path = Path(__file__).parent / "demo" / "index.html"
     if not demo_path.exists():
         raise HTTPException(status_code=404, detail="Demo page not found")
@@ -42,6 +41,9 @@ async def serve_demo():
 
 @app.post("/api/generate")
 async def generate(req: GenerateRequest):
+    if len(req.topic) < 3:
+        raise ValueError('Topic must be at least 3 characters long')
+        
     if not os.environ.get("MISTRAL_API_KEY"):
         raise HTTPException(
             status_code=500,
