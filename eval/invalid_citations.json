@@ -1,0 +1,255 @@
+{
+  "total_invalid": 50,
+  "invalid_citations": [
+    {
+      "file": "contexts_0.json",
+      "raw_reference": "IPCC (Mbow, C., et al.) (2019). Special Report on Climate Change and Land (SRCCL) – Chapter 5: Food Security. Intergovernmental Panel on Climate Change (IPCC). Available via the [IPCC website](https://www.ipcc.ch/srccl/)",
+      "parsed_title": "Special Report on Climate Change and Land (SRCCL) – Chapter 5: Food Security"
+    },
+    {
+      "file": "contexts_0.json",
+      "raw_reference": "FAO, IFAD, UNICEF, WFP and WHO (2020). The State of Food Security and Nutrition in the World (SOFI) 2020: Transforming Food Systems for Affordable Healthy Diets. Food and Agriculture Organization of the United Nations (FAO). Available via the [FAO Publications database](https://www.fao.org/publications/sofi)",
+      "parsed_title": "The State of Food Security and Nutrition in the World (SOFI) 2020: Transforming Food Systems for Affordable Healthy Diets"
+    },
+    {
+      "file": "contexts_1.json",
+      "raw_reference": "World Health Organization (2021). Ethics and Governance of Artificial Intelligence for Health. *World Health Organization*. Available via WHO Institutional Repository for Information Sharing (IRIS): https://iris.who.int/",
+      "parsed_title": "Ethics and Governance of Artificial Intelligence for Health"
+    },
+    {
+      "file": "contexts_10.json",
+      "raw_reference": "Kamilaris, A., Fonts, A., & Prenafeta-Boldύ, F. X. (2019). From supply chain to supply chain transparency: A case study of blockchain in the food industry. *Computers in Industry*. https://doi.org/10.1016/j.compind.2019.01.005",
+      "parsed_title": "From supply chain to supply chain transparency: A case study of blockchain in the food industry"
+    },
+    {
+      "file": "contexts_10.json",
+      "raw_reference": "Hastig, G. M., & Sodhi, M. S. (2020). The Impact of Blockchain Technology on Supply Chain Transparency: A Framework and Research Agenda. *Transportation Research Part E: Logistics and Transportation Review*. https://doi.org/10.1016/j.tre.2020.102067",
+      "parsed_title": "The Impact of Blockchain Technology on Supply Chain Transparency: A Framework and Research Agenda"
+    },
+    {
+      "file": "contexts_10.json",
+      "raw_reference": "IBM Institute for Business Value. (2018). Building a Transparent Supply Chain. IBM.",
+      "parsed_title": "Building a Transparent Supply Chain"
+    },
+    {
+      "file": "contexts_10.json",
+      "raw_reference": "World Economic Forum. (2020). Blockchain in global supply chains: A multi-stakeholder approach to challenges and opportunities. World Economic Forum.",
+      "parsed_title": "Blockchain in global supply chains: A multi-stakeholder approach to challenges and opportunities"
+    },
+    {
+      "file": "contexts_10.json",
+      "raw_reference": "Panarello, A., Tapas, N., Merlino, G., Longo, F., & Puliafito, A. (2018). Can Blockchain Strengthen the Internet of Things? *IT Professional* (IEEE). https://doi.org/10.1109/MITP.2018.033677356",
+      "parsed_title": "Can Blockchain Strengthen the Internet of Things? *IT Professional* (IEEE)"
+    },
+    {
+      "file": "contexts_10.json",
+      "raw_reference": "Saberi, S., Kouhizadeh, M., Sarkis, J., & Shen, L. (2019). Supply Chain Transparency: A Review of Enabling Technologies and the Impact on Sustainability. *Journal of Cleaner Production*. https://doi.org/10.1016/j.jclepro.2019.04.133",
+      "parsed_title": "Supply Chain Transparency: A Review of Enabling Technologies and the Impact on Sustainability"
+    },
+    {
+      "file": "contexts_11.json",
+      "raw_reference": "IHS Markit & Qualcomm Technologies, Inc., *The 5G Economy: How 5G Technology Will Contribute to the Global Economy*, 2019, Available via Qualcomm website.",
+      "parsed_title": "IHS Markit & Qualcomm Technologies, Inc., *The 5G Economy: How 5G Technology Will Contribute to the Global Economy*, 2019, Available via Qualcomm webs"
+    },
+    {
+      "file": "contexts_11.json",
+      "raw_reference": "Deloitte Insights, *The Road to 5G: The Inevitable Growth of Infrastructure*, 2018, Available via Deloitte Insights database.",
+      "parsed_title": "Deloitte Insights, *The Road to 5G: The Inevitable Growth of Infrastructure*, 2018, Available via Deloitte Insights database."
+    },
+    {
+      "file": "contexts_11.json",
+      "raw_reference": "Peterson, L.L., Davie, B.S., *5G Mobile Networks: A Systems Approach*, 2020, DOI: 10.2200/S01019ED1V01Y202006NSR001.",
+      "parsed_title": "Peterson, L.L., Davie, B.S., *5G Mobile Networks: A Systems Approach*, 2020, DOI: 10.2200/S01019ED1V01Y202006NSR001."
+    },
+    {
+      "file": "contexts_11.json",
+      "raw_reference": "PwC, *The Global Economic Impact of 5G*, 2021, Available via PwC Strategy& reports.",
+      "parsed_title": "PwC, *The Global Economic Impact of 5G*, 2021, Available via PwC Strategy& reports."
+    },
+    {
+      "file": "contexts_11.json",
+      "raw_reference": "Nguyen, T.T., et al., *5G Network Deployment and the Associated Economic Growth: A Review*, 2022, https://doi.org/10.1016/j.telpol.2022.102327.",
+      "parsed_title": "Nguyen, T.T., et al., *5G Network Deployment and the Associated Economic Growth: A Review*, 2022, https://doi.org/10.1016/j.telpol.2022.102327."
+    },
+    {
+      "file": "contexts_11.json",
+      "raw_reference": "Nokia Bell Labs, *Making 5G Proactive and Predictive for the Enterprise*, 2020, Available via Nokia Bell Labs white papers.",
+      "parsed_title": "Nokia Bell Labs, *Making 5G Proactive and Predictive for the Enterprise*, 2020, Available via Nokia Bell Labs white papers."
+    },
+    {
+      "file": "contexts_11.json",
+      "raw_reference": "Czernich, N., et al., *The Impact of Broadband and 5G on Economic Growth: Evidence from OECD Countries*, 2023, Available via OECD iLibrary.",
+      "parsed_title": "Czernich, N., et al., *The Impact of Broadband and 5G on Economic Growth: Evidence from OECD Countries*, 2023, Available via OECD iLibrary."
+    },
+    {
+      "file": "contexts_11.json",
+      "raw_reference": "World Economic Forum & Boston Consulting Group, *5G and the Future of Connectivity*, 2020, Available via WEF reports repository.",
+      "parsed_title": "World Economic Forum & Boston Consulting Group, *5G and the Future of Connectivity*, 2020, Available via WEF reports repository."
+    },
+    {
+      "file": "contexts_2.json",
+      "raw_reference": "Law, K.L., & Thompson, R.C. (2014). *Microplastics in the marine environment: A review of their sources, distribution, and effects*. *Science*, 345(6193). https://doi.org/10.1126/science.1254065",
+      "parsed_title": "*Microplastics in the marine environment: A review of their sources, distribution, and effects*"
+    },
+    {
+      "file": "contexts_2.json",
+      "raw_reference": "FAO (2017). *Microplastics in fisheries and aquaculture: Status of knowledge on their occurrence and implications for aquatic organisms and food safety*. FAO Fisheries and Aquaculture Technical Paper No. 615.",
+      "parsed_title": "*Microplastics in fisheries and aquaculture: Status of knowledge on their occurrence and implications for aquatic organisms and food safety*"
+    },
+    {
+      "file": "contexts_2.json",
+      "raw_reference": "Zhang, Y., Kang, S., Allen, S., Allen, D., Gao, T., Sillanpää, M. (2020). *Microplastics in the atmosphere and their environmental implications: A comprehensive review*. *Science of The Total Environment*, 747. https://doi.org/10.1016/j.scitotenv.2020.141337",
+      "parsed_title": "*Microplastics in the atmosphere and their environmental implications: A comprehensive review*"
+    },
+    {
+      "file": "contexts_3.json",
+      "raw_reference": "Barrero, J.M., Bloom, N., & Davis, S.J. (2021). Global Survey: Remote Work is Working. WFH Research. https://wfhresearch.com/wp-content/uploads/2021/06/wfh_global_survey_june2021.pdf",
+      "parsed_title": "Global Survey: Remote Work is Working"
+    },
+    {
+      "file": "contexts_3.json",
+      "raw_reference": "Microsoft Research (2022). Microsoft New Future of Work Report 2022. Microsoft. https://www.microsoft.com/en-us/research/uploads/prod/2022/06/Microsoft-NFW-Report.pdf",
+      "parsed_title": "Microsoft New Future of Work Report 2022"
+    },
+    {
+      "file": "contexts_3.json",
+      "raw_reference": "Song, Y., & Gao, J. (2020). The Impact of Telework on Emotional Experience: When, and for Whom, Does Telework Improve Daily Emotional Well-being? *European Journal of Work and Organizational Psychology*. https://doi.org/10.1080/1359432X.2019.1707512",
+      "parsed_title": "The Impact of Telework on Emotional Experience: When, and for Whom, Does Telework Improve Daily Emotional Well-being? *European Journal of Work and Organizational Psychology*"
+    },
+    {
+      "file": "contexts_3.json",
+      "raw_reference": "Gallup, Inc. (2022). State of the Global Workplace: 2022 Report. Gallup. https://www.gallup.com/workplace/349484/state-of-the-global-workplace.aspx",
+      "parsed_title": "State of the Global Workplace: 2022 Report"
+    },
+    {
+      "file": "contexts_4.json",
+      "raw_reference": "Chen, M., Tworek, J., Jun, H., et al. (2024). *The Impact of Large Language Models on Software Development: A Survey*. ACM Computing Surveys. Available via ACM Digital Library.",
+      "parsed_title": "*The Impact of Large Language Models on Software Development: A Survey*"
+    },
+    {
+      "file": "contexts_4.json",
+      "raw_reference": "Nijkamp, E., Pang, B., Hayashi, H., et al. (2023). *A Causal Framework for AI Risks and Operationalization in Software Engineering*. Microsoft Research. https://arxiv.org/abs/2308.09274",
+      "parsed_title": "*A Causal Framework for AI Risks and Operationalization in Software Engineering*"
+    },
+    {
+      "file": "contexts_4.json",
+      "raw_reference": "Hou, X., Zhao, Y., Liu, Y., et al. (2023). *Software Engineering in the Age of Foundation Models: A Roadmap*. Chinese Academy of Sciences. https://arxiv.org/abs/2312.14187",
+      "parsed_title": "*Software Engineering in the Age of Foundation Models: A Roadmap*"
+    },
+    {
+      "file": "contexts_4.json",
+      "raw_reference": "O'Reilly Media (2024). *The New Stack: How AI is Changing the Developer Experience*. O'Reilly Radar Report. Available via O'Reilly Media.",
+      "parsed_title": "*The New Stack: How AI is Changing the Developer Experience*"
+    },
+    {
+      "file": "contexts_4.json",
+      "raw_reference": "Schäfer, M., Nadi, S., Eghbali, A., et al. (2024). *Large Language Models for Test-Driven Development: A Preliminary Study*. IEEE/ACM International Conference on Software Engineering: Companion Proceedings (ICSE-Companion). Available via IEEE Xplore.",
+      "parsed_title": "*Large Language Models for Test-Driven Development: A Preliminary Study*"
+    },
+    {
+      "file": "contexts_5.json",
+      "raw_reference": "Persily, N., & Tucker, J. A. (Eds.). (2020). *Social Media and Democracy: The State of the Field, Prospects for Reform*. Cambridge University Press.",
+      "parsed_title": "*Social Media and Democracy: The State of the Field, Prospects for Reform*"
+    },
+    {
+      "file": "contexts_5.json",
+      "raw_reference": "Sinha, S., et al. (2020). Social Media and Elections: A Study of the 2019 Indian General Election. *Social Media + Society*, 6(4). DOI: 10.1177/2056305120984440",
+      "parsed_title": "Social Media and Elections: A Study of the 2019 Indian General Election"
+    },
+    {
+      "file": "contexts_5.json",
+      "raw_reference": "Bradshaw, S., & Howard, P. N. (2019). *The Global Disinformation Order: 2019 Global Inventory of Organised Social Media Manipulation*. Oxford Internet Institute. https://comprop.oii.ox.ac.uk/research/cybertroops2019/",
+      "parsed_title": "*The Global Disinformation Order: 2019 Global Inventory of Organised Social Media Manipulation*"
+    },
+    {
+      "file": "contexts_6.json",
+      "raw_reference": "Global Energy Review: CO2 Emissions in 2023 — International Energy Agency (IEA), 2024, https://www.iea.org/reports/global-energy-review-co2-emissions-in-2023",
+      "parsed_title": "Global Energy Review: CO2 Emissions in 2023 — International Energy Agency (IEA), 2024, https://www.iea.org/reports/global-energy-review-co2-emissions-"
+    },
+    {
+      "file": "contexts_6.json",
+      "raw_reference": "Emissions savings from wind and solar power: A U.S. county-level analysis — Millstein, D., Wiser, R., Bolinger, M., & Seel, J., 2022, https://doi.org/10.1126/sciadv.abn3162",
+      "parsed_title": "county-level analysis — Millstein, D., Wiser, R., Bolinger, M., & Seel, J., 2022, https://doi.org/10.1126/sciadv.abn3162"
+    },
+    {
+      "file": "contexts_6.json",
+      "raw_reference": "Renewable Power Generation Costs in 2022 — International Renewable Energy Agency (IRENA), 2023, https://www.irena.org/Publications/2023/Aug/Renewable-Power-Generation-Costs-in-2022",
+      "parsed_title": "Renewable Power Generation Costs in 2022 — International Renewable Energy Agency (IRENA), 2023, https://www.irena.org/Publications/2023/Aug/Renewable-"
+    },
+    {
+      "file": "contexts_6.json",
+      "raw_reference": "System-level impacts of 30% and 45% renewable energy targets in the European Union by 2030 — Capros, P., et al., 2021, https://doi.org/10.1016/j.rser.2021.111322",
+      "parsed_title": "System-level impacts of 30% and 45% renewable energy targets in the European Union by 2030 — Capros, P., et al., 2021, https://doi.org/10.1016/j.rser."
+    },
+    {
+      "file": "contexts_6.json",
+      "raw_reference": "World Energy Transitions Outlook 2023: 1.5°C Pathway — International Renewable Energy Agency (IRENA), 2023, https://www.irena.org/Publications/2023/Jun/World-Energy-Transitions-Outlook-2023",
+      "parsed_title": "World Energy Transitions Outlook 2023: 1.5°C Pathway — International Renewable Energy Agency (IRENA), 2023, https://www.irena.org/Publications/2023/Ju"
+    },
+    {
+      "file": "contexts_6.json",
+      "raw_reference": "The role of renewable energy in the global energy transformation — Teske, S. (Ed.), 2019, https://doi.org/10.1016/j.esr.2019.100386",
+      "parsed_title": "(Ed.), 2019, https://doi.org/10.1016/j.esr.2019.100386"
+    },
+    {
+      "file": "contexts_6.json",
+      "raw_reference": "The critical role of electricity storage in deep decarbonization of the power sector: A study of renewable energy integration in China — He, G., et al., 2020, https://doi.org/10.1016/j.joule.2020.07.022",
+      "parsed_title": "The critical role of electricity storage in deep decarbonization of the power sector: A study of renewable energy integration in China — He, G., et al"
+    },
+    {
+      "file": "contexts_6.json",
+      "raw_reference": "The Shared Socioeconomic Pathways and their energy, land use, and greenhouse gas emissions implications: An overview — Riahi, K., et al., 2017, https://doi.org/10.1016/j.gloenvcha.2016.05.009",
+      "parsed_title": "The Shared Socioeconomic Pathways and their energy, land use, and greenhouse gas emissions implications: An overview — Riahi, K., et al., 2017, https:"
+    },
+    {
+      "file": "contexts_7.json",
+      "raw_reference": "Social Media Use and Adolescent Mental Health: Findings From the UK Millennium Cohort Study — Yvonne Kelly, Afshin Zilanawala, Cara Booker, & Amanda Sacker (2019) — [https://doi.org/10.1016/j.eclinm.2018.12.005](https://doi.org/10.1016/j.eclinm.2018.12.005)",
+      "parsed_title": "Social Media Use and Adolescent Mental Health: Findings From the UK Millennium Cohort Study — Yvonne Kelly, Afshin Zilanawala, Cara Booker, & Amanda S"
+    },
+    {
+      "file": "contexts_7.json",
+      "raw_reference": "Association of Screen Time and Depression in Adolescence — Katherine M. Keyes, PhD, et al. (2019) — [https://doi.org/10.1001/jamapediatrics.2019.1759](https://doi.org/10.1001/jamapediatrics.2019.1759)",
+      "parsed_title": "Keyes, PhD, et al"
+    },
+    {
+      "file": "contexts_7.json",
+      "raw_reference": "Social Media and Youth Mental Health: The U.S. Surgeon General’s Advisory — Office of the U.S. Surgeon General (2023) — [https://www.hhs.gov/sites/default/files/sg-youth-mental-health-social-media-advisory.pdf](https://www.hhs.gov/sites/default/files/sg-youth-mental-health-social-media-advisory.pdf)",
+      "parsed_title": "Surgeon General’s Advisory — Office of the U.S"
+    },
+    {
+      "file": "contexts_7.json",
+      "raw_reference": "Digital Media, Anxiety, and Depression in Children — Sarah E. Domoff, et al. (2019) — [https://doi.org/10.1542/peds.2018-3418](https://doi.org/10.1542/peds.2018-3418)",
+      "parsed_title": "Domoff, et al"
+    },
+    {
+      "file": "contexts_7.json",
+      "raw_reference": "The Social Media and Mental Health Connection — Jacqueline Nesi, Ph.D. (2020) — [https://www.apa.org/news/apa/2020/social-media-mental-health](https://www.apa.org/news/apa/2020/social-media-mental-health)",
+      "parsed_title": "(2020) — [https://www.apa.org/news/apa/2020/social-media-mental-health](https://www.apa.org/news/apa/2020/social-media-mental-health)"
+    },
+    {
+      "file": "contexts_7.json",
+      "raw_reference": "Does Time Spent Using Social Media Impact Mental Health?: An Eight Year Longitudinal Study — Jean M. Twenge, et al. (2020) — [https://doi.org/10.1016/j.chb.2020.106399](https://doi.org/10.1016/j.chb.2020.106399)",
+      "parsed_title": "Twenge, et al"
+    },
+    {
+      "file": "contexts_7.json",
+      "raw_reference": "Social Media, Body Image, and Eating Disorders — Anne J. Maheux, et al. (2022) — [https://doi.org/10.1016/j.copsyc.2022.101571](https://doi.org/10.1016/j.copsyc.2022.101571)",
+      "parsed_title": "Maheux, et al"
+    },
+    {
+      "file": "contexts_7.json",
+      "raw_reference": "Adolescent Mental Health in the Digital Age: Facts, Fears and Future Directions — Candice L. Odgers (2018) — [https://doi.org/10.1111/jcpp.13037](https://doi.org/10.1111/jcpp.13037)",
+      "parsed_title": "Odgers (2018) — [https://doi.org/10.1111/jcpp.13037](https://doi.org/10.1111/jcpp.13037)"
+    },
+    {
+      "file": "contexts_8.json",
+      "raw_reference": "Schmidt, K., Cowen, P.J., Harmer, C.J., et al. (2015). Effect of Probiotic and Prebiotic on Gut-Brain Axis: A Randomized, Double-Blind, Placebo-Controlled Study in Healthy Individuals. *Psychopharmacology*. https://doi.org/10.1007/s00213-015-4000-4",
+      "parsed_title": "Effect of Probiotic and Prebiotic on Gut-Brain Axis: A Randomized, Double-Blind, Placebo-Controlled Study in Healthy Individuals"
+    },
+    {
+      "file": "contexts_9.json",
+      "raw_reference": "Cardoso-Leite, P., & Bavelier, D. (2014). Video Game Play, Attention, and Learning: How to Shape the Development of Attention and Influence Learning? *Current Opinion in Neurology*. DOI: 10.1016/j.conb.2014.05.005",
+      "parsed_title": "Video Game Play, Attention, and Learning: How to Shape the Development of Attention and Influence Learning? *Current Opinion in Neurology*"
+    }
+  ]
+}

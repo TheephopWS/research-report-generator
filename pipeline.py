@@ -1,5 +1,6 @@
 import asyncio
 import base64
+import json
 import subprocess
 import tempfile
 from pathlib import Path
@@ -43,9 +44,10 @@ async def _compile_pdf(latex: str) -> bytes | None:
 
 
 class ResearchPipeline:
-    def __init__(self, topic: str, num_sources: int):
+    def __init__(self, topic: str, num_sources: int, filepath: str = "contexts.json"):
         self.topic = topic
-        self.num_sources = max(2, min(num_sources, 6))
+        self.num_sources = max(2, min(num_sources, 10))
+        self.contexts = []
         self.agents = [
             SearchAgent(),
             SummarizerAgent(),
@@ -53,6 +55,18 @@ class ResearchPipeline:
             CriticAgent(),
             FormatterAgent(),
         ]
+        self.contexts_filepath = filepath
+
+    def _save_contexts(self, output: str) -> None:
+        """Save input, contexts, and output to a JSON file."""
+        contexts_file = Path(self.contexts_filepath)
+        data = {
+            "input": self.topic,
+            "contexts": self.contexts,
+            "output": output,
+        }
+        with open(contexts_file, "w") as f:
+            json.dump(data, f, indent=2)
 
     async def run(self) -> AsyncGenerator[Dict[str, Any], None]:
         if len(self.topic) < 3:
@@ -72,6 +86,8 @@ class ResearchPipeline:
             try:
                 output = await agent.run(context)
                 context[agent.id] = output
+                if agent.id == "search":
+                    self.contexts.append(output)
                 yield {
                     "type": "agent_done",
                     "agent": agent.id,
@@ -104,3 +120,6 @@ class ResearchPipeline:
                 }
         except Exception:
             pass
+
+        # Save contexts to file
+        self._save_contexts(context.get("formatter", ""))

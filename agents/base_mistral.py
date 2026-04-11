@@ -1,32 +1,30 @@
 import os
 from abc import ABC, abstractmethod
 from typing import Dict, Any
-from openai import AsyncOpenAI
 
-MODEL = "deepseek-chat"
+from mistralai import Mistral
+
+MODEL = "mistral-small-latest"
 
 class BaseAgent(ABC):
     id: str
     start_message: str
 
     def __init__(self):
-        self.client = AsyncOpenAI(
-            api_key=os.environ.get("DEEPSEEK_API_KEY"),
-            base_url="https://api.deepseek.com"
-        )
+        self.client = Mistral(api_key=os.environ.get("MISTRAL_API_KEY"))
 
-    async def call_mistral(  # Keep the same method name to avoid breaking your agents
+    async def call_mistral(
         self,
         system: str,
         user: str,
         max_tokens: int = 1500,
     ) -> str:
-        response = await self.client.chat.completions.create(
+        response = await self.client.chat.complete_async(
             model=MODEL,
             max_tokens=max_tokens,
             messages=[
                 {"role": "system", "content": system},
-                {"role": "user", "content": user},
+                {"role": "user",   "content": user},
             ],
         )
         return response.choices[0].message.content or ""
