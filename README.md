@@ -6,9 +6,9 @@ Deployed on [https://research-report-generator-live.onrender.com](https://resear
 
 ## Quick Start
 
-### 1. Get a free Mistral API key
-Sign up at **https://console.mistral.ai** → API Keys → Create key.
-The free tier includes `mistral-small-latest` with generous rate limits.
+### 1. Get a DeepSeek API key
+Sign up at **https://platform.deepseek.com** → API Keys → Create key.
+This repo will use `deepseek-chat` model.
 
 ### 2. Install dependencies
 ```bash
@@ -43,7 +43,7 @@ research-report-generator/
 ├── pipeline.py                # Orchestrates the 5-agent chain
 ├── agents/
 │   ├── __init__.py
-│   ├── base.py                # Shared async Mistral client + BaseAgent
+│   ├── base.py                # Shared async DeepSeek/OpenAI-compatible client + BaseAgent
 │   ├── search_agent.py        # Identifies N sources from model knowledge
 │   ├── summarizer_agent.py    # Summarises each source academically
 │   ├── synthesizer_agent.py   # Synthesises into a coherent narrative
@@ -55,14 +55,6 @@ research-report-generator/
 ├── .env.example
 └── README.md
 ```
-
----
-
-## Note on web search
-
-Mistral's free API does not include a live web search tool, so the Search Agent draws on the model's trained
-knowledge to identify real published sources. For topics after the model's knowledge cutoff, consider pairing with a free search API such as SerpAPI or DuckDuckGo Instant
-Answer API and passing results into the Search Agent's prompt.
 
 ---
 
