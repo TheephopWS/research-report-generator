@@ -75,3 +75,7 @@ Streams [Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Se
 | `agent_done`   | `agent`, `output`           |
 | `agent_error`  | `agent`, `message`          |
 | `report`       | `content` (Markdown string) |
+
+---
+
+Disclaimer: This repository is a part of the SDSC4070 Large Language Models course project.
