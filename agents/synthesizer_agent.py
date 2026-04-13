@@ -136,11 +136,11 @@ class SynthesizerAgent(BaseAgent):
         ]
 
         # Get template
-        response = await self.client.chat.complete_async(
+        response = await self.client.chat.completions.create(
             model=MODEL,
             messages=messages,
             tools=[LATEX_TEMPLATE_TOOL],
-            tool_choice="any",
+            tool_choice="required",
             max_tokens=1000,
         )
 
@@ -171,10 +171,9 @@ class SynthesizerAgent(BaseAgent):
                 "role": "tool",
                 "content": tool_result,
                 "tool_call_id": tc.id,
-                "name": fn_name,
             })
 
-            response = await self.client.chat.complete_async(
+            response = await self.client.chat.completions.create(
                 model=MODEL,
                 messages=messages,
                 max_tokens=5000,
