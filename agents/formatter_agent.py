@@ -51,7 +51,8 @@ content as a complete, publication-ready Markdown document using this exact stru
 Rules:
 - Output ONLY clean Markdown — no commentary, no code fences around the output
 - Use the revised synthesis content (not the original) wherever possible
-- Make headings specific and descriptive, not generic labels""",
+- Make headings specific and descriptive, not generic labels
+- CITATION RULE: Every factual claim must use inline author-year citations (e.g. "Brown et al. (2020) show..."). Replace any shorthand labels like (S1), (S2), Source 1, etc. with the correct author-year citation extracted from the References section""",
             user=f'Topic: "{topic}"\n\nResearch content:\n{critic_output}\n\nOriginal sources:\n{sources}',
             max_tokens=5000,
         )

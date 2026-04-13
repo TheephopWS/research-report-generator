@@ -25,6 +25,8 @@ REVISED SYNTHESIS:
 identified in the critique above
 - Maintain the five-section structure (Overview, Theme A, Theme B, Agreements & Tensions, \
 Synthesis Conclusion) but improve the content
+- CITATION RULE: Every factual claim must use inline author-year citations (e.g. \
+"Smith et al. (2022) found..."). Never use shorthand labels like (S1), (S2), Source 1, etc.
 
 Be direct and intellectually honest.""",
             user=f'Topic: "{topic}"\n\nSynthesis to critique:\n{synthesis}',

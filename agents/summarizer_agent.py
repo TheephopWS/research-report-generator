@@ -18,7 +18,11 @@ class SummarizerAgent(BaseAgent):
             - The evidence, data, or methodology used
             - Its specific relevance to the research topic
 
-            Label each summary with its source number (e.g. "Source 1:", "Source 2:", etc.). \
+            Label each summary with the author(s) and year in this exact format: \
+            "Source 1 — Smith et al. (2022):", "Source 2 — Jones (2019):", etc. \
+            Extract the author(s) and year directly from the source metadata provided. \
+            Within each summary, use inline author-year citations (e.g. "Smith et al. (2022) argue...") \
+            rather than generic labels like "(S1)" or "the source". \
             Be precise and analytical.
             """,
             user=f'Topic: "{topic}"\n\nSources to summarize:\n{sources}',

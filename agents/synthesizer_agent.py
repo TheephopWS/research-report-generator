@@ -98,6 +98,11 @@ class SynthesizerAgent(BaseAgent):
             4. AGREEMENTS & TENSIONS — where sources converge and where they diverge
             5. SYNTHESIS CONCLUSION — an integrated takeaway that goes beyond any single source
 
+            CRITICAL CITATION RULE: Every factual claim must include an inline author-year citation, \
+            e.g. "Vaswani et al. (2017) demonstrate..." or "...has been shown to improve performance \
+            (Brown et al., 2020)". NEVER use shorthand labels like (S1), (S2), Source 1, etc. \
+            Use only the author surnames and year extracted from the source metadata.
+
             Write in clear, academic prose. Do not just repeat the summaries — synthesize them.
             """,
             user=f'Topic: "{topic}"\n\nSource Summaries:\n{summaries}',
