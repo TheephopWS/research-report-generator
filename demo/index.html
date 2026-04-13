@@ -501,6 +501,7 @@
           <button class="btn-dl" id="pdf-btn" onclick="downloadPdf()" style="display:none;">Download PDF</button>
         </div>
       </div>
+      <div id="pdf-error-msg" style="display:none;margin-bottom:.6rem;padding:.4rem .7rem;background:var(--red-dim);border:1px solid var(--red);border-radius:7px;color:var(--red);font-size:.75rem;"></div>
       <div class="report-body markdown-body" id="report-body"></div>
     </div>
 
@@ -516,6 +517,8 @@ const AGENTS = [
   { id:"formatter",   name:"Formatter",     desc:"Composes the final Markdown report",      tagClass:"tag-formatter" },
 ];
 
+const PDF_STEP = { id:"pdf", name:"PDF Compiler", desc:"Generates LaTeX and compiles to PDF" };
+
 let reportText = "";
 let pdfBlobUrl = "";
 let running = false;
@@ -523,11 +526,12 @@ let running = false;
 // Build pipeline steps on load
 function buildPipeline() {
   const el = document.getElementById("pipeline-steps");
-  el.innerHTML = AGENTS.map((a, i) => `
+  const allSteps = [...AGENTS, PDF_STEP];
+  el.innerHTML = allSteps.map((a, i) => `
     <div class="agent-step" id="step-${a.id}">
       <div class="agent-connector">
         <div class="agent-dot" id="dot-${a.id}"></div>
-        ${i < AGENTS.length - 1 ? '<div class="agent-line"></div>' : ""}
+        ${i < allSteps.length - 1 ? '<div class="agent-line"></div>' : ""}
       </div>
       <div class="agent-info">
         <div class="agent-info-row">
@@ -630,10 +634,13 @@ async function runPipeline() {
   document.getElementById("report-card").style.display = "none";
   document.getElementById("pdf-btn").style.display = "none";
   document.getElementById("pdf-status").style.display = "none";
+  const pdfErrEl = document.getElementById("pdf-error-msg");
+  if (pdfErrEl) { pdfErrEl.style.display = "none"; pdfErrEl.textContent = ""; }
   document.getElementById("log-panel").innerHTML = '<p class="log-placeholder">Agent outputs will appear here as each step completes...</p>';
 
   // Reset all agent statuses
   AGENTS.forEach(a => setAgentStatus(a.id, "idle"));
+  setAgentStatus("pdf", "idle");
 
   const agentMap = Object.fromEntries(AGENTS.map(a => [a.id, a]));
 
@@ -689,13 +696,23 @@ async function runPipeline() {
           document.getElementById("report-card").scrollIntoView({ behavior: "smooth" });
         } else if (event.type === "pdf_compiling") {
           document.getElementById("pdf-status").style.display = "inline-block";
+          setAgentStatus("pdf", "running");
         } else if (event.type === "pdf") {
           document.getElementById("pdf-status").style.display = "none";
+          setAgentStatus("pdf", "done");
           if (pdfBlobUrl) URL.revokeObjectURL(pdfBlobUrl);
           const bytes = Uint8Array.from(atob(event.content), c => c.charCodeAt(0));
           const blob = new Blob([bytes], { type: "application/pdf" });
           pdfBlobUrl = URL.createObjectURL(blob);
           document.getElementById("pdf-btn").style.display = "inline-block";
+        } else if (event.type === "pdf_error") {
+          document.getElementById("pdf-status").style.display = "none";
+          setAgentStatus("pdf", "error");
+          const pill = document.getElementById("pill-pdf");
+          if (pill) pill.title = event.message;
+          // Show error beneath the PDF button area
+          const pdfErrorEl = document.getElementById("pdf-error-msg");
+          if (pdfErrorEl) { pdfErrorEl.textContent = event.message; pdfErrorEl.style.display = "block"; }
         }
       }
     }

@@ -1,3 +1,4 @@
+import logging
 import os
 import json
 from pathlib import Path
@@ -9,6 +10,13 @@ from fastapi.responses import StreamingResponse, HTMLResponse
 from pydantic import BaseModel, Field
 
 load_dotenv()
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+    datefmt="%H:%M:%S",
+)
+logger = logging.getLogger(__name__)
 
 from pipeline import ResearchPipeline
 
@@ -44,10 +52,10 @@ async def generate(req: GenerateRequest):
     if len(req.topic) < 3:
         raise ValueError('Topic must be at least 3 characters long')
         
-    if not os.environ.get("MISTRAL_API_KEY"):
+    if not os.environ.get("DEEPSEEK_API_KEY"):
         raise HTTPException(
             status_code=500,
-            detail="MISTRAL_API_KEY environment variable is not set.",
+            detail="DEEPSEEK_API_KEY environment variable is not set.",
         )
 
     async def event_stream():

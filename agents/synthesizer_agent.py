@@ -1,7 +1,22 @@
 import json
+import logging
+import re
 from typing import Dict, Any
 
 from agents.base import BaseAgent, MODEL
+
+logger = logging.getLogger(__name__)
+
+_VALID_JSON_ESCAPES = re.compile(r'\\(?!["\\bfnrtu/])')
+
+
+def _safe_json_loads(s: str) -> Any:
+    try:
+        return json.loads(s)
+    except json.JSONDecodeError:
+        # Escape any backslash not already part of a valid JSON escape sequence
+        fixed = _VALID_JSON_ESCAPES.sub(r'\\\\', s)
+        return json.loads(fixed)
 
 
 def get_report_template(title: str, sections: list) -> str:
@@ -112,6 +127,7 @@ class SynthesizerAgent(BaseAgent):
     async def generate_latex(self, context: Dict[str, Any]) -> str:
         topic = context["topic"]
         report = context.get("formatter", context.get("critic", ""))
+        logger.info("generate_latex called (report length: %d chars)", len(report))
 
         messages: list[Dict[str, Any]] = [
             {
@@ -141,6 +157,7 @@ class SynthesizerAgent(BaseAgent):
         ]
 
         # Get template
+        logger.info("Calling LLM for template tool call")
         response = await self.client.chat.completions.create(
             model=MODEL,
             messages=messages,
@@ -154,12 +171,14 @@ class SynthesizerAgent(BaseAgent):
         if assistant_msg.tool_calls:
             tc = assistant_msg.tool_calls[0]
             fn_name = tc.function.name
+            logger.info("Tool call received: %s", fn_name)
             raw_args = tc.function.arguments
-            fn_args = json.loads(raw_args) if isinstance(raw_args, str) else raw_args
+            fn_args = _safe_json_loads(raw_args) if isinstance(raw_args, str) else raw_args
             args_str = raw_args if isinstance(raw_args, str) else json.dumps(raw_args)
 
             tool_fn = _TOOL_FUNCTIONS.get(fn_name)
             tool_result = tool_fn(**fn_args) if tool_fn else ""
+            logger.info("Template built (%d chars), calling LLM for full LaTeX", len(tool_result))
 
             messages.append({
                 "role": "assistant",
@@ -183,5 +202,12 @@ class SynthesizerAgent(BaseAgent):
                 messages=messages,
                 max_tokens=5000,
             )
+        else:
+            logger.warning("No tool call in first LLM response — proceeding with raw content")
 
-        return response.choices[0].message.content or ""
+        raw = response.choices[0].message.content or ""
+        # Strip markdown code fences the LLM may have added despite instructions
+        latex = re.sub(r'^```(?:latex|tex)?\s*\n', '', raw.strip())
+        latex = re.sub(r'\n```\s*$', '', latex)
+        logger.info("LaTeX finalised (%d chars)", len(latex))
+        return latex.strip()

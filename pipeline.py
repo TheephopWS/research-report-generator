@@ -1,10 +1,13 @@
 import asyncio
 import base64
 import json
+import logging
 import subprocess
 import tempfile
 from pathlib import Path
 from typing import AsyncGenerator, Dict, Any
+
+logger = logging.getLogger(__name__)
 
 from agents import (
     SearchAgent,
@@ -19,8 +22,8 @@ def _run_pdflatex(latex: str) -> bytes | None:
         tex_path = Path(tmpdir) / "report.tex"
         tex_path.write_text(latex, encoding="utf-8")
         try:
-            for _ in range(2):
-                subprocess.run(
+            for i in range(2):
+                result = subprocess.run(
                     [
                         "pdflatex",
                         "-interaction=nonstopmode",
@@ -30,12 +33,29 @@ def _run_pdflatex(latex: str) -> bytes | None:
                     capture_output=True,
                     timeout=120,
                 )
+                if result.returncode != 0:
+                    logger.warning(
+                        "pdflatex pass %d exit code %d\nSTDOUT:\n%s\nSTDERR:\n%s",
+                        i + 1,
+                        result.returncode,
+                        result.stdout.decode(errors="replace")[-3000:],
+                        result.stderr.decode(errors="replace")[-1000:],
+                    )
+                else:
+                    logger.info("pdflatex pass %d succeeded", i + 1)
             pdf_path = Path(tmpdir) / "report.pdf"
             if pdf_path.exists():
+                logger.info("PDF created: %d bytes", pdf_path.stat().st_size)
                 return pdf_path.read_bytes()
-        except (FileNotFoundError, subprocess.TimeoutExpired, OSError):
-            return None
-    return None
+            else:
+                logger.error("PDF file not found after pdflatex runs — check LaTeX source")
+        except FileNotFoundError:
+            logger.error("pdflatex not found — is TeX Live / MikTeX installed?")
+        except subprocess.TimeoutExpired:
+            logger.error("pdflatex timed out after 120 seconds")
+        except OSError as exc:
+            logger.error("OS error running pdflatex: %s", exc)
+        return None
 
 
 async def _compile_pdf(latex: str) -> bytes | None:
@@ -110,16 +130,27 @@ class ResearchPipeline:
         synthesizer = next(a for a in self.agents if a.id == "synthesizer")
         try:
             yield {"type": "pdf_compiling"}
+            logger.info("Starting LaTeX generation for topic: %s", self.topic)
             latex = await synthesizer.generate_latex(context)
-            yield {"type": "latex", "content": latex}
-            pdf_bytes = await _compile_pdf(latex)
-            if pdf_bytes:
-                yield {
-                    "type": "pdf",
-                    "content": base64.b64encode(pdf_bytes).decode(),
-                }
-        except Exception:
-            pass
+            if not latex.strip():
+                logger.error("LaTeX generation returned empty content")
+                yield {"type": "pdf_error", "message": "LaTeX generation returned empty content"}
+            else:
+                logger.info("LaTeX generated (%d chars), starting PDF compilation", len(latex))
+                yield {"type": "latex", "content": latex}
+                pdf_bytes = await _compile_pdf(latex)
+                if pdf_bytes:
+                    logger.info("PDF compiled successfully (%d bytes)", len(pdf_bytes))
+                    yield {
+                        "type": "pdf",
+                        "content": base64.b64encode(pdf_bytes).decode(),
+                    }
+                else:
+                    logger.error("PDF compilation produced no output")
+                    yield {"type": "pdf_error", "message": "PDF compilation failed — pdflatex may not be installed or the LaTeX source has errors. Check server logs."}
+        except Exception as exc:
+            logger.exception("Unhandled error during LaTeX/PDF generation")
+            yield {"type": "pdf_error", "message": str(exc)}
 
         # Save contexts to file
         self._save_contexts(context.get("formatter", ""))
