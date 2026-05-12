@@ -158,12 +158,14 @@ class SynthesizerAgent(BaseAgent):
 
         # Get template
         logger.info("Calling LLM for template tool call")
-        response = await self.client.chat.completions.create(
+        # Deepseek syntax
+        # response = await self.client.chat.completions.create(
+        response = await self.client.chat.complete_async(
             model=MODEL,
             messages=messages,
             tools=[LATEX_TEMPLATE_TOOL],
             tool_choice="required",
-            max_tokens=1000,
+            max_tokens=1500,
         )
 
         assistant_msg = response.choices[0].message
@@ -195,9 +197,12 @@ class SynthesizerAgent(BaseAgent):
                 "role": "tool",
                 "content": tool_result,
                 "tool_call_id": tc.id,
+                "name": fn_name, # mistral syntax
             })
 
-            response = await self.client.chat.completions.create(
+            # Deepseek syntax
+            # response = await self.client.chat.completions.create(
+            response = await self.client.chat.complete_async(
                 model=MODEL,
                 messages=messages,
                 max_tokens=5000,
