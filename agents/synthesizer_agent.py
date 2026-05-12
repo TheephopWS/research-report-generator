@@ -3,7 +3,7 @@ import logging
 import re
 from typing import Dict, Any
 
-from agents.base import BaseAgent, MODEL
+from agents.base_mistral import BaseAgent, MODEL
 
 logger = logging.getLogger(__name__)
 
