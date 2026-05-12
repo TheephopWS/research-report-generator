@@ -1,5 +1,5 @@
 from typing import Dict, Any
-from agents.base import BaseAgent
+from agents.base_mistral import BaseAgent
 
 
 class SummarizerAgent(BaseAgent):

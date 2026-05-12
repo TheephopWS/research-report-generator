@@ -1,6 +1,6 @@
 from typing import Dict, Any
 from datetime import datetime
-from agents.base import BaseAgent
+from agents.base_mistral import BaseAgent
 
 
 class FormatterAgent(BaseAgent):
