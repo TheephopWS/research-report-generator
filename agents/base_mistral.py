@@ -2,7 +2,7 @@ import os
 from abc import ABC, abstractmethod
 from typing import Dict, Any
 
-from mistralai import Mistral
+from mistralai.client import Mistral
 
 MODEL = "mistral-small-latest"
 
